@@ -127,122 +127,118 @@ void loop() {
 
   int val1p, val2p, val3p;
   int val1s, val2s, val3s;
-  
+
+  tft.setRotation(1);
+  tft.setCursor(10, 205);
+  tft.setTextColor(ILI9341_NAVY);  
+  tft.setTextSize(2);
+  tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
+    
   static int token;
   switch (token){
     case 0:
     {
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
+      tft.print("v1:");
+      tft.print((int)val1s);
+      tft.print("v2:");
+      tft.print((int)val2s);
+      tft.print("v3:");
+      tft.print((int)val3s);
       token++;
-      tft.println(token);
     }break;
     case 1:
     {
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
+      tft.print("v1:");
+      tft.print((int)val1s);
+      tft.print("v2:");
+      tft.print((int)val2s);
+      tft.print("v3:");
+      tft.print((int)val3s);
       token++;
-      tft.println(token);
     }break;
     case 2:
     {
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
+      tft.print("v1:");
+      tft.print((int)val1s);
+      tft.print("v2:");
+      tft.print((int)val2s);
+      tft.print("v3:");
+      tft.print((int)val3s);
       token++;
-      tft.println(token);
     }break;
     case 3:
     {
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
+      tft.print("v1:");
+      tft.print((int)val1s);
+      tft.print("v2:");
+      tft.print((int)val2s);
+      tft.print("v3:");
+      tft.print((int)val3s);
       token++;
-      tft.println(token);
     }break;
     case 4:
     {
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      ++token;
-      tft.println(token);
-    }break;
-    case 5:
-    {
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      ++token;
-      tft.println(token);
+      tft.print("v1:");
+      tft.print((int)val1s);
+      tft.print("v2:");
+      tft.print((int)val2s);
+      tft.print("v3:");
+      tft.print((int)val3s);
+      token++;
     }break;
     case 6:
     {
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      ++token;
-      tft.println(token);
+      //tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
+      tft.print("v1:");
+      tft.print((int)val1s);
+      tft.print("v2:");
+      tft.print((int)val2s);
+      tft.print("v3:");
+      tft.print((int)val3s);
+      token++;
     }break;
-    case 7:
-    {
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      ++token;
-      tft.println(token);
-     }break;
     case 8:
     {
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      ++token;
-      tft.println(token);
+      plotter (1, xp1, yp1, xp2, yp2, xp3, yp3, val1p, val1s);
+      plotter (2, xp4, yp4, xp5, yp5, xp6, yp6, val2p, val2s);
+      plotter (3, xp7, yp7, xp8, yp8, xp9, yp9, val3p, val3s);
+      token++;
     }break;
+    
     case 9:
-    {
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      ++token;
-      tft.println(token);
+    {  
+      token=0;
     }break;
     default:
     {
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      token=0;
-      tft.println(token);
+      val1 = analogRead(potpin1);            // reads the value of the potentiometer (value between 0 and 1023)
+      val1p = analogRead(potpin1);
+  
+      val1 = map(val1, 0, 1023, 0, 180);     // scale it to use it with the servo (value between 0 and 180)
+      val1s = map(val1p, 0, 1023, 0, 180);     // scale it to use it with the servo (value between 0 and 180)
+      //estimated_val1 = simpleKalmanFilter1.updateEstimate(val1);
+  
+      val2 = analogRead(potpin2);
+      val2p = analogRead(potpin2);
+  
+      val2 = map(val2, 0, 1023, 270, 0);
+      val2s = map(val2p, 0, 1023, 270, 0);
+      //estimated_val2 = simpleKalmanFilter2.updateEstimate(val2);
+  
+      val3 = analogRead(potpin3);
+      val3p = analogRead(potpin3);
+  
+      val3 = map(val3, 0, 1023, 270, 0);
+      val3s = map(val3p, 0, 1023, 270, 0);
+
+      myservo1.write(val1s);                  // sets the servo position according to the scaled value
+      myservo2.write(val2);
+      myservo3.write(val3);
+      token++;
     }break;
   }
 
-  
+  /*
   val1 = analogRead(potpin1);            // reads the value of the potentiometer (value between 0 and 1023)
   val1p = analogRead(potpin1);
   
@@ -261,11 +257,11 @@ void loop() {
   val3p = analogRead(potpin3);
   
   val3 = map(val3, 0, 1023, 270, 0);
-  val3s = map(val3p, 0, 1023, 270, 0);
+  val3s = map(val3p, 0, 1023, 270, 0);*/
   //estimated_val3 = simpleKalmanFilter3.updateEstimate(val3);
   
 
-  if (millis() > refresh_time) {
+  /*if (millis() > refresh_time) {
      myservo1.write(val1s);                  // sets the servo position according to the scaled value
      myservo2.write(val2);
      myservo3.write(val3);
@@ -282,7 +278,7 @@ void loop() {
     tft.setTextColor(ILI9341_NAVY);  
     tft.setTextSize(2);
     tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-    //getDummyButterfly();
+    //getDummyButterfly();*/
 
     /*
     tft.drawLine(xp2, yp2, xp1, yp1, ILI9341_WHITE);
@@ -305,17 +301,18 @@ void loop() {
     tft.drawLine(xp7, yp7, xp9, yp9, ILI9341_WHITE);
     tft.drawLine(xp8, yp8, xp9, yp9, ILI9341_BLUE);
     */ 
-    plotter (1, xp1, yp1, xp2, yp2, xp3, yp3, val1p, val1s);
+    
+    /*plotter (1, xp1, yp1, xp2, yp2, xp3, yp3, val1p, val1s);
     plotter (2, xp4, yp4, xp5, yp5, xp6, yp6, val2p, val2s);
-    plotter (3, xp7, yp7, xp8, yp8, xp9, yp9, val3p, val3s);
+    plotter (3, xp7, yp7, xp8, yp8, xp9, yp9, val3p, val3s);*/
      
       /*myservo1.write(estimated_val1);                  // sets the servo position according to the scaled value
       myservo2.write(estimated_val2);
       myservo3.write(estimated_val3);*/
       //delay(15);
 
-      refresh_time = millis() + SERIAL_REFRESH_TIME;
-  }
+      //refresh_time = millis() + SERIAL_REFRESH_TIME;
+  //}
 }
 
 void plotter (int graph, int l_xp1, int l_yp1, int l_xp2, int l_yp2, int l_xp3, int l_yp3, int l_valp, int l_vals){
