@@ -36,10 +36,11 @@
 #define TFT_RST 32 
 #define TFT_MISO MISO //12
 
-#define TERMINAL 0
-#define ADC      1
-#define MAP_P    2
-#define SERVO    3
+#define SERIAL_MONITOR    0
+#define ADC               1
+#define SERVO             2
+#define GRAPHIC           3
+#define NOTHING_TO_DO     10
 
 // Use hardware SPI (on Uno, #13, #12, #11) and the above for CS/DC
 Adafruit_ILI9341 tft = Adafruit_ILI9341(TFT_CS, TFT_DC);
@@ -59,7 +60,7 @@ SimpleKalmanFilter simpleKalmanFilter3(2, 2, 0.01);
 int potpin1 = A1;  // analog pin used to connect the potentiometer
 int potpin2 = A2;
 int potpin3 = A3;
-int val1,val2,val3;    // variable to read the value from the analog pin
+int val1, val2, val3;    // variable to read the value from the analog pin
 float estimated_val1, estimated_val2, estimated_val3;
 //static int continuer;
 
@@ -127,192 +128,89 @@ void loop() {
 
   int val1p, val2p, val3p;
   int val1s, val2s, val3s;
-
+  
   tft.setRotation(1);
-  tft.setCursor(10, 205);
+  //tft.setCursor(10, 205);
   tft.setTextColor(ILI9341_NAVY);  
   tft.setTextSize(2);
-  tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
+  //tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
     
-  static int token;
+  static int token = NOTHING_TO_DO;
+  
+  static unsigned long previous_Millis_SERIAL_MONITOR = 0;
+  static unsigned long previous_Millis_ADC = 0;
+  static unsigned long previous_Millis_SERVO = 0;
+  static unsigned long previous_Millis_GRAPHIC = 0;
+
+  const long interval_SERIAL_MONITOR = 60;
+  const long interval_ADC = 5;
+  const long interval_SERVO = 20;
+  const long interval_GRAPHIC = 20;
+
+  static unsigned long currentMillis = millis();
+
+  if ((currentMillis - previous_Millis_SERIAL_MONITOR) >= interval_SERIAL_MONITOR ) token = SERIAL_MONITOR;
+  if ((currentMillis - previous_Millis_ADC) >= interval_ADC )  token = ADC;
+  if ((currentMillis - previous_Millis_SERVO) >= interval_SERVO )  token = SERVO;
+  if ((currentMillis - previous_Millis_GRAPHIC) >= interval_GRAPHIC )  token = GRAPHIC;
+  
   switch (token){
-    case 0:
+    case SERIAL_MONITOR:
     {
-      tft.print("v1:");
-      tft.print((int)val1s);
-      tft.print("v2:");
-      tft.print((int)val2s);
-      tft.print("v3:");
-      tft.print((int)val3s);
-      token++;
+      Serial.print("min:");
+      Serial.print(0);
+      Serial.print(" s1:");
+      Serial.print((int)val1s);
+      Serial.print(" s2:");
+      Serial.print((int)val2s);
+      Serial.print(" s3:");
+      Serial.print((int)val3s);
+      Serial.print(" max:");
+      Serial.print((int)180);
+      previous_Millis_SERIAL_MONITOR = millis();
+      token = GRAPHIC; //NOTHING_TO_DO;
     }break;
-    case 1:
+    case ADC:
     {
-      tft.print("v1:");
-      tft.print((int)val1s);
-      tft.print("v2:");
-      tft.print((int)val2s);
-      tft.print("v3:");
-      tft.print((int)val3s);
-      token++;
+      val1p = analogRead(potpin1); 
+      val2p = analogRead(potpin2); 
+      val3p = analogRead(potpin3); 
+      previous_Millis_ADC = millis();
+      token = GRAPHIC;//NOTHING_TO_DO;
     }break;
-    case 2:
+    case SERVO:
     {
-      tft.print("v1:");
-      tft.print((int)val1s);
-      tft.print("v2:");
-      tft.print((int)val2s);
-      tft.print("v3:");
-      tft.print((int)val3s);
-      token++;
+      val1p = analogRead(potpin1); 
+      val2p = analogRead(potpin2); 
+      val3p = analogRead(potpin3);
+      
+      val1s = map(val1p, 0, 1023, 0, 180);
+      val2s = map(val2p, 0, 1023, 180, 0);
+      val3s = map(val3p, 0, 1023, 270, 90);
+      myservo1.write(val1s);                  // sets the servo position according to the scaled value
+      myservo2.write(val2s);
+      myservo3.write(val3s);
+      previous_Millis_SERVO = millis();
+      token = GRAPHIC; //NOTHING_TO_DO;
     }break;
-    case 3:
-    {
-      tft.print("v1:");
-      tft.print((int)val1s);
-      tft.print("v2:");
-      tft.print((int)val2s);
-      tft.print("v3:");
-      tft.print((int)val3s);
-      token++;
-    }break;
-    case 4:
-    {
-      tft.print("v1:");
-      tft.print((int)val1s);
-      tft.print("v2:");
-      tft.print((int)val2s);
-      tft.print("v3:");
-      tft.print((int)val3s);
-      token++;
-    }break;
-    case 6:
-    {
-      //tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-      tft.print("v1:");
-      tft.print((int)val1s);
-      tft.print("v2:");
-      tft.print((int)val2s);
-      tft.print("v3:");
-      tft.print((int)val3s);
-      token++;
-    }break;
-    case 8:
+    case GRAPHIC:
     {
       plotter (1, xp1, yp1, xp2, yp2, xp3, yp3, val1p, val1s);
       plotter (2, xp4, yp4, xp5, yp5, xp6, yp6, val2p, val2s);
       plotter (3, xp7, yp7, xp8, yp8, xp9, yp9, val3p, val3s);
-      token++;
+      previous_Millis_GRAPHIC = millis();
+      token = GRAPHIC; //NOTHING_TO_DO;
     }break;
-    
-    case 9:
-    {  
-      token=0;
+    case NOTHING_TO_DO:
+    { 
+      token = GRAPHIC;
     }break;
     default:
     {
-      val1 = analogRead(potpin1);            // reads the value of the potentiometer (value between 0 and 1023)
-      val1p = analogRead(potpin1);
-  
-      val1 = map(val1, 0, 1023, 0, 180);     // scale it to use it with the servo (value between 0 and 180)
-      val1s = map(val1p, 0, 1023, 0, 180);     // scale it to use it with the servo (value between 0 and 180)
-      //estimated_val1 = simpleKalmanFilter1.updateEstimate(val1);
-  
-      val2 = analogRead(potpin2);
-      val2p = analogRead(potpin2);
-  
-      val2 = map(val2, 0, 1023, 270, 0);
-      val2s = map(val2p, 0, 1023, 270, 0);
-      //estimated_val2 = simpleKalmanFilter2.updateEstimate(val2);
-  
-      val3 = analogRead(potpin3);
-      val3p = analogRead(potpin3);
-  
-      val3 = map(val3, 0, 1023, 270, 0);
-      val3s = map(val3p, 0, 1023, 270, 0);
-
-      myservo1.write(val1s);                  // sets the servo position according to the scaled value
-      myservo2.write(val2);
-      myservo3.write(val3);
-      token++;
+      token = GRAPHIC;
     }break;
   }
-
-  /*
-  val1 = analogRead(potpin1);            // reads the value of the potentiometer (value between 0 and 1023)
-  val1p = analogRead(potpin1);
-  
-  val1 = map(val1, 0, 1023, 0, 180);     // scale it to use it with the servo (value between 0 and 180)
-  val1s = map(val1p, 0, 1023, 0, 180);     // scale it to use it with the servo (value between 0 and 180)
-  //estimated_val1 = simpleKalmanFilter1.updateEstimate(val1);
-  
-  val2 = analogRead(potpin2);
-  val2p = analogRead(potpin2);
-  
-  val2 = map(val2, 0, 1023, 270, 0);
-  val2s = map(val2p, 0, 1023, 270, 0);
-  //estimated_val2 = simpleKalmanFilter2.updateEstimate(val2);
-  
-  val3 = analogRead(potpin3);
-  val3p = analogRead(potpin3);
-  
-  val3 = map(val3, 0, 1023, 270, 0);
-  val3s = map(val3p, 0, 1023, 270, 0);*/
-  //estimated_val3 = simpleKalmanFilter3.updateEstimate(val3);
-  
-
-  /*if (millis() > refresh_time) {
-     myservo1.write(val1s);                  // sets the servo position according to the scaled value
-     myservo2.write(val2);
-     myservo3.write(val3);
-
-    Serial.print("val1: ");
-    Serial.println((int)val1s);
-    Serial.print("val2: ");
-    Serial.println((int)val2);
-    Serial.print("val3: ");
-    Serial.println((int)val3);
-       
-    tft.setRotation(1);
-    tft.setCursor(10, 205);
-    tft.setTextColor(ILI9341_NAVY);  
-    tft.setTextSize(2);
-    tft.println("Bjr Jodo, Abby, Honorine\n Evan, Malicka, Zara\n");
-    //getDummyButterfly();*/
-
-    /*
-    tft.drawLine(xp2, yp2, xp1, yp1, ILI9341_WHITE);
-    tft.drawLine(xp1, yp1, xp3, yp3, ILI9341_WHITE);
-    x1 = map(val1p, 0, 1023, xp1, xp3);
-    y1 = map(val1s, 0, 180, yp1, yp2);
-    tft.fillCircle(x1_old, y1_old, 3, ILI9341_OLIVE );
-    tft.fillCircle(x1, y1, 3, ILI9341_ORANGE );
-    //tft.drawLine(xp1, yp1, xp3, 30, ILI9341_ORANGE);
-    x1_old = x1;
-    y1_old = y1;
-    */
-    /*
-
-    tft.drawLine(xp5, yp5, xp4, yp4, ILI9341_WHITE);
-    tft.drawLine(xp4, yp4, xp6, yp6, ILI9341_WHITE);
-    tft.drawLine(xp5, yp5, xp6, yp6, ILI9341_GREEN);
-
-    tft.drawLine(xp8, yp8, xp7, yp7, ILI9341_WHITE);
-    tft.drawLine(xp7, yp7, xp9, yp9, ILI9341_WHITE);
-    tft.drawLine(xp8, yp8, xp9, yp9, ILI9341_BLUE);
-    */ 
-    
-    /*plotter (1, xp1, yp1, xp2, yp2, xp3, yp3, val1p, val1s);
-    plotter (2, xp4, yp4, xp5, yp5, xp6, yp6, val2p, val2s);
-    plotter (3, xp7, yp7, xp8, yp8, xp9, yp9, val3p, val3s);*/
-     
-      /*myservo1.write(estimated_val1);                  // sets the servo position according to the scaled value
-      myservo2.write(estimated_val2);
-      myservo3.write(estimated_val3);*/
-      //delay(15);
-
-      //refresh_time = millis() + SERIAL_REFRESH_TIME;
-  //}
+  delay(100);
 }
 
 void plotter (int graph, int l_xp1, int l_yp1, int l_xp2, int l_yp2, int l_xp3, int l_yp3, int l_valp, int l_vals){
