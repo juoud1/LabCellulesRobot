@@ -168,7 +168,7 @@ void loop() {
       Serial.print(" max:");
       Serial.print((int)180);
       previous_Millis_SERIAL_MONITOR = millis();
-      token = GRAPHIC; //NOTHING_TO_DO;
+      token = NOTHING_TO_DO;
     }break;
     case ADC:
     {
@@ -176,7 +176,7 @@ void loop() {
       val2p = analogRead(potpin2); 
       val3p = analogRead(potpin3); 
       previous_Millis_ADC = millis();
-      token = GRAPHIC;//NOTHING_TO_DO;
+      token = NOTHING_TO_DO;
     }break;
     case SERVO:
     {
@@ -191,7 +191,7 @@ void loop() {
       myservo2.write(val2s);
       myservo3.write(val3s);
       previous_Millis_SERVO = millis();
-      token = GRAPHIC; //NOTHING_TO_DO;
+      token = NOTHING_TO_DO;
     }break;
     case GRAPHIC:
     {
@@ -199,18 +199,22 @@ void loop() {
       plotter (2, xp4, yp4, xp5, yp5, xp6, yp6, val2p, val2s);
       plotter (3, xp7, yp7, xp8, yp8, xp9, yp9, val3p, val3s);
       previous_Millis_GRAPHIC = millis();
-      token = GRAPHIC; //NOTHING_TO_DO;
+      token = NOTHING_TO_DO;
     }break;
     case NOTHING_TO_DO:
     { 
-      token = GRAPHIC;
+      token = NOTHING_TO_DO;
     }break;
     default:
     {
-      token = GRAPHIC;
+      token = NOTHING_TO_DO;
     }break;
   }
   delay(100);
+}
+
+void readPotentionmetre(){
+  
 }
 
 void plotter (int graph, int l_xp1, int l_yp1, int l_xp2, int l_yp2, int l_xp3, int l_yp3, int l_valp, int l_vals){
